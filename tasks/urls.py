@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 
 # app_name = 'tasks'
 urlpatterns = [
+    path('', auth_views.LoginView.as_view(template_name='tasks/login.html'), name='login'),
     path('tasklist/', views.tasklist, name='tasklist'),
     path('login/', auth_views.LoginView.as_view(template_name='tasks/login.html'), name='login'),
     path('register/', views.register, name='register'),
