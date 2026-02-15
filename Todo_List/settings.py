@@ -119,6 +119,16 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [BASE_DIR / "static"]
+# এটি ফাইলগুলোকে অপ্টিমাইজ করবে এবং ক্যাশ করবে
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+import os
+
+# Base URL to access uploaded media
+MEDIA_URL = '/media/'
+
+# Actual filesystem path to store uploaded files
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # =========================

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Task
 # Create your views here.
 
-from .forms import UserRegisterForm
+from .forms import UserRegisterForm, ProfileForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -22,15 +22,27 @@ def tasklist(request):
 
 def register(request):
     if request.method == 'POST':
-        form= UserRegisterForm(request.POST)
-        if form.is_valid():
-            user=form.save()
+        form = UserRegisterForm(request.POST)
+        p_form = ProfileForm(request.POST, request.FILES)  # <-- handle file uploads
+
+        if form.is_valid() and p_form.is_valid():  # check both forms
+            user = form.save()
+            profile = p_form.save(commit=False)
+            profile.user = user
+            profile.save()
+
             login(request, user)
             messages.success(request, f'Account created successfully!')
             return redirect('login')
     else:
-        form= UserRegisterForm()
-    return render(request, 'tasks/register.html', {'form': form})
+        form = UserRegisterForm()
+        p_form = ProfileForm()
+
+    context = {
+        'form': form,
+        'p_form': p_form
+    }
+    return render(request, 'tasks/register.html', context)
         
 
 @login_required

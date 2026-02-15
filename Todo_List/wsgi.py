@@ -6,7 +6,3 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Todo_List.settings')
 
 application = get_wsgi_application()
 
-from django.contrib.auth import get_user_model
-User = get_user_model()
-if not User.objects.filter(username='admin').exists():
-    User.objects.create_superuser('rabbi', 'imrabbihasan@gmail.com', '123')

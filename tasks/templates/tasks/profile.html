@@ -66,8 +66,15 @@
 <div class="profile-card text-center">
     <h2 class="mb-4">Your Profile</h2>
 
-    <img src="{% static 'images/default_profile.png' %}" alt="Default Profile" class="profile-pic mb-3">
-
+    {% if user.profile.image %}
+        <img src="{{ user.profile.image.url }}" 
+            alt="{{ user.username }} Profile" 
+            style="width:200px; height:200px; border-radius:50%; margin-bottom:10px;">
+    {% else %}
+        <img src="{% static 'images/default_profile.png' %}" 
+            alt="Default Profile" 
+            style="width:200px; height:200px; border-radius:50%; margin-bottom:10px;">
+    {% endif %}
 
     <!-- User info -->
     <div class="text-start mt-3">

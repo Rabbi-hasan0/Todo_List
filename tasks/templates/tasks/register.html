@@ -31,20 +31,32 @@
 <div class="card">
     <h2 class="text-center mb-4">Create an Account</h2>
 
-    <form method="POST">
+    <!-- Added enctype for file uploads -->
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
 
+        <!-- Render UserRegisterForm fields -->
         {% for field in form %}
             <div class="mb-3">
                 {{ field.label_tag }}
-
-                <!-- Add Bootstrap form-control class -->
                 {{ field|add_class:"form-control" }}
-
                 {% if field.help_text %}
                     <div class="form-text">{{ field.help_text }}</div>
                 {% endif %}
+                {% for error in field.errors %}
+                    <div class="text-danger">{{ error }}</div>
+                {% endfor %}
+            </div>
+        {% endfor %}
 
+        <!-- Render ProfileForm fields (e.g., profile picture) -->
+        {% for field in p_form %}
+            <div class="mb-3">
+                {{ field.label_tag }}
+                {{ field|add_class:"form-control" }}
+                {% if field.help_text %}
+                    <div class="form-text">{{ field.help_text }}</div>
+                {% endif %}
                 {% for error in field.errors %}
                     <div class="text-danger">{{ error }}</div>
                 {% endfor %}
@@ -53,7 +65,6 @@
 
         <button type="submit" class="btn btn-primary w-100">Register</button>
     </form>
-
 
     <p class="text-center mt-3">
         Already have an account? <a href="{% url 'login' %}">Login here</a>
