@@ -17,9 +17,10 @@
 
         /* Card styling */
         .card {
-            max-width: 400px;
-            margin: 80px auto;
-            padding: 30px 25px;
+            width: 95%;               /* responsive width */
+            max-width: 400px;         /* max width for desktops */
+            margin: 60px auto;        /* auto center */
+            padding: 25px;
             border-radius: 15px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.1);
             background-color: #ffffff;
@@ -58,6 +59,23 @@
             border-radius: 10px;
             min-width: 250px;
         }
+
+        /* Mobile adjustments */
+        @media (max-width: 576px) {
+            .card {
+                margin: 40px auto;
+                padding: 20px;
+            }
+            .btn-custom {
+                font-size: 0.95rem;
+                padding: 8px;
+            }
+            .form-control {
+                font-size: 0.95rem;
+                padding: 8px 10px;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -98,11 +116,11 @@
         <button type="submit" class="btn btn-custom w-100">Login</button>
     </form>
 
-    <p class="text-center mt-3">
+    <p class="text-center mt-3 mb-1">
         Don't have an account? <a href="{% url 'register' %}">Register here</a>
     </p>
-    <p class="text-center mt-3">
-        Do you forgot your password? <a href="{% url 'password_reset' %}">Reset here</a>
+    <p class="text-center mt-1">
+        Forgot your password? <a href="{% url 'password_reset' %}">Reset here</a>
     </p>
 </div>
 
