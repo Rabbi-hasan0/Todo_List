@@ -75,7 +75,10 @@
                             <a class="nav-link" href="{% url 'password_change' %}">Change Password</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'login' %}">Logout</a>
+                            <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="nav-link" style="background:none; border:none; cursor:pointer;">Logout</button>
+                            </form>
                         </li>
                     {% else %}
                         <li class="nav-item">
