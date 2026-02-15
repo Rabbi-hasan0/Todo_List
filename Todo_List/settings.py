@@ -13,12 +13,8 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG=False
 
 
-ALLOWED_HOSTS = [
-    ".onrender.com",
-    "localhost",
-    "127.0.0.1",
-    os.getenv("RENDER_EXTERNAL_HOSTNAME"),
-]
+CSRF_TRUSTED_ORIGINS = ['https://todo-list-x5kr.onrender.com']
+ALLOWED_HOSTS = ['todo-list-x5kr.onrender.com', 'localhost', '127.0.0.1']
 
 
 
