@@ -137,13 +137,16 @@ LOGOUT_ON_GET = True
 # =========================
 # EMAIL (SMTP Gmail secure)
 # =========================
+# এটি ইমেইল না পাঠিয়ে সরাসরি লগের মধ্যে ইমেইল লিঙ্কটি লিখে দিবে
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv("EMAIL_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_PASS")
-
+EMAIL_TIMEOUT = 10  # এটি ১০ সেকেন্ড পর কানেকশন ছেড়ে দিবে
 
 
 # =========================
