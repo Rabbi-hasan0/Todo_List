@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # =========================
 SECRET_KEY = os.getenv("SECRET_KEY")
 
-DEBUG=False
+DEBUG=True
 
 
 CSRF_TRUSTED_ORIGINS = ['https://todo-list-x5kr.onrender.com']
@@ -115,15 +115,12 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [BASE_DIR / "static"]
-# এটি ফাইলগুলোকে অপ্টিমাইজ করবে এবং ক্যাশ করবে
+
+# প্রোডাকশনে স্ট্যাটিক ফাইল হ্যান্ডেল করার জন্য
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-import os
-
-# Base URL to access uploaded media
+# মিডিয়া ফাইল সেটিংস
 MEDIA_URL = '/media/'
-
-# Actual filesystem path to store uploaded files
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
@@ -146,7 +143,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv("EMAIL_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_PASS")
-EMAIL_TIMEOUT = 10  # এটি ১০ সেকেন্ড পর কানেকশন ছেড়ে দিবে
+EMAIL_TIMEOUT = 20  # এটি ১০ সেকেন্ড পর কানেকশন ছেড়ে দিবে
 
 
 # =========================
