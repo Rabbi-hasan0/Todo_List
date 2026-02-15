@@ -13,62 +13,77 @@
         body {
             background-color: #f8f9fa;
         }
+
         .card {
-            max-width: 500px;
+            max-width: 450px; /* slightly narrower for mobile */
             margin: 50px auto;
-            padding: 20px;
+            padding: 25px;
             border-radius: 15px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
+
         .btn-custom {
             background-color: #0d6efd;
             color: white;
+        }
+
+        /* Make input fields full width on small screens */
+        @media (max-width: 576px) {
+            .card {
+                margin: 20px;
+                padding: 20px;
+            }
+            .btn {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <h2 class="text-center mb-4">Create an Account</h2>
+<div class="container">
+    <div class="card">
+        <h2 class="text-center mb-4">Create an Account</h2>
 
-    <!-- Added enctype for file uploads -->
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
+        <!-- Form with enctype for file uploads -->
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
 
-        <!-- Render UserRegisterForm fields -->
-        {% for field in form %}
-            <div class="mb-3">
-                {{ field.label_tag }}
-                {{ field|add_class:"form-control" }}
-                {% if field.help_text %}
-                    <div class="form-text">{{ field.help_text }}</div>
-                {% endif %}
-                {% for error in field.errors %}
-                    <div class="text-danger">{{ error }}</div>
-                {% endfor %}
-            </div>
-        {% endfor %}
+            <!-- Render UserRegisterForm fields -->
+            {% for field in form %}
+                <div class="mb-3">
+                    {{ field.label_tag }}
+                    {{ field|add_class:"form-control" }}
+                    {% if field.help_text %}
+                        <div class="form-text">{{ field.help_text }}</div>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
 
-        <!-- Render ProfileForm fields (e.g., profile picture) -->
-        {% for field in p_form %}
-            <div class="mb-3">
-                {{ field.label_tag }}
-                {{ field|add_class:"form-control" }}
-                {% if field.help_text %}
-                    <div class="form-text">{{ field.help_text }}</div>
-                {% endif %}
-                {% for error in field.errors %}
-                    <div class="text-danger">{{ error }}</div>
-                {% endfor %}
-            </div>
-        {% endfor %}
+            <!-- Render ProfileForm fields -->
+            {% for field in p_form %}
+                <div class="mb-3">
+                    {{ field.label_tag }}
+                    {{ field|add_class:"form-control" }}
+                    {% if field.help_text %}
+                        <div class="form-text">{{ field.help_text }}</div>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
 
-        <button type="submit" class="btn btn-primary w-100">Register</button>
-    </form>
+            <button type="submit" class="btn btn-primary w-100 btn-custom">Register</button>
+        </form>
 
-    <p class="text-center mt-3">
-        Already have an account? <a href="{% url 'login' %}">Login here</a>
-    </p>
+        <p class="text-center mt-3 mb-0">
+            Already have an account? <a href="{% url 'login' %}">Login here</a>
+        </p>
+    </div>
 </div>
 
 <!-- Bootstrap JS CDN -->
